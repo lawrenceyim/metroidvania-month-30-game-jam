@@ -1,6 +1,8 @@
 #nullable enable
 using System;
 using System.Collections.Generic;
+using Godot;
+using InputSystem;
 
 namespace StateMachineSystem;
 
@@ -22,6 +24,10 @@ public class StateMachine<T> where T : Enum {
 
     public void PhysicsProcess() {
         _currentState?.PhysicsProcess();
+    }
+
+    public void Input(InputEventDto dto) {
+        _currentState?.Input(dto);
     }
 
     public void SwitchState(T key) {
