@@ -1,3 +1,3 @@
 public interface ITick {
-    public void PhysicsTick(double delta);
+    public void PhysicsTick();
 }

@@ -14,6 +14,7 @@
     <Content Include="Scripts\Utils\JsonUtils.cs.uid" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Scripts\Game Objects\" />
     <Folder Include="Scripts\Scenes\" />
   </ItemGroup>
 </Project>

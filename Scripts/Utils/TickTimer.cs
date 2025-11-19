@@ -1,5 +1,4 @@
 using System;
-using Godot;
 
 public class TickTimer : ITick {
     public event Action TimedOut;
@@ -28,7 +27,7 @@ public class TickTimer : ITick {
         _stopped = false;
     }
 
-    public void PhysicsTick(double delta) {
+    public void PhysicsTick() {
         if (_stopped) {
             return;
         }

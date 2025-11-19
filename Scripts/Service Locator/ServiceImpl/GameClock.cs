@@ -32,7 +32,7 @@ public partial class GameClock : Node, IService {
         }
 
         foreach (ITick scene in _activeScenes.Values) {
-            scene?.PhysicsTick(delta);
+            scene?.PhysicsTick();
         }
     }
 }

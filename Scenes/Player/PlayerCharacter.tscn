@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://c5oea303t02br"]
+
+[ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://Assets/Sprites/icon.svg" id="1_2g1qh"]
+[ext_resource type="Script" uid="uid://ch10jmxpv4oso" path="res://Scripts/Game Objects/Player/Player.cs" id="1_xfpj1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ujtgj"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_xfpj1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_2g1qh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_xfpj1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_ujtgj")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_xfpj1")

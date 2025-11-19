@@ -1,37 +1,25 @@
 using Godot;
 
-namespace InputSystem {
-    public abstract class InputEventDto { }
+namespace InputSystem;
 
-    public class KeyDto : InputEventDto {
-        public readonly string Identifier;
-        public readonly bool Pressed;
+public abstract class InputEventDto { }
 
-        public KeyDto(string identifier, bool pressed) {
-            Identifier = identifier;
-            Pressed = pressed;
-        }
-    }
+public class KeyDto(string identifier, bool pressed) : InputEventDto {
+    public readonly string Identifier = identifier;
+    public readonly bool Pressed = pressed;
+}
 
-    public class MouseMotionDto : InputEventDto {
-        public readonly Vector2 Position;
-        public readonly Vector2 Relative;
+public class MouseMotionDto(Vector2 position, Vector2 relative) : InputEventDto {
+    public readonly Vector2 Position = position;
+    public readonly Vector2 Relative = relative;
+}
 
-        public MouseMotionDto(Vector2 position, Vector2 relative) {
-            Position = position;
-            Relative = relative;
-        }
-    }
+public class MouseButtonPressedDto(string identifier, Vector2 position) : InputEventDto {
+    public readonly string Identifier = identifier;
+    public readonly Vector2 Position = position;
+}
 
-    public class MouseButtonDto : InputEventDto {
-        public readonly string Identifier;
-        public readonly bool Pressed;
-        public readonly Vector2 Position;
-
-        public MouseButtonDto(string identifier, bool pressed, Vector2 position) {
-            Identifier = identifier;
-            Pressed = pressed;
-            Position = position;
-        }
-    }
+public class MouseButtonReleasedDto(string identifier, Vector2 position) : InputEventDto {
+    public readonly string Identifier = identifier;
+    public readonly Vector2 Position = position;
 }

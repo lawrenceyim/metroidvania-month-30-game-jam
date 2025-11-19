@@ -62,12 +62,10 @@ public class InputMapping {
                 if (e is InputEventKey k) {
                     GD.Print($"{k} is key.");
                     bindings.Add(action, new InputBinding(k.Keycode));
-                }
-                else if (e is InputEventMouseButton mb) {
+                } else if (e is InputEventMouseButton mb) {
                     GD.Print($"{mb} is mousebutton.");
                     bindings.Add(action, new InputBinding(mb.ButtonIndex));
-                }
-                else {
+                } else {
                     GD.Print($"{e} is neither.");
                 }
             }
