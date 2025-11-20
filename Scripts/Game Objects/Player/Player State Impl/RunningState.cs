@@ -15,6 +15,10 @@ public class RunningState : PlayerState {
     public override void Input(InputEventDto dto) {
         if (dto is KeyDto keyDto) {
             _player.SetKeyPressed(keyDto.Identifier, keyDto.Pressed);
+
+            if (keyDto.Identifier == "Space" && keyDto.Pressed) {
+                // TODO: Jump
+            }
         }
     }
 
