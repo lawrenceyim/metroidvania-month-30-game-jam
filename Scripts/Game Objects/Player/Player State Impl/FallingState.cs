@@ -1,14 +1,11 @@
-using Godot;
 using InputSystem;
+using PlayerSystem;
 
-namespace PlayerSystem;
+public class FallingState : PlayerState {
+    private Player _player;
+    private readonly float _gravityAcceleration = 0.05f;
 
-public class JumpingState : PlayerState {
-    private readonly Player _player;
-    private readonly float _airborneSpeed = 1f;
-    private readonly float _jumpForce = -3f;
-
-    public JumpingState(Player player) {
+    public FallingState(Player player) {
         _player = player;
     }
 
@@ -23,16 +20,15 @@ public class JumpingState : PlayerState {
     public override void Process(double delta) { }
 
     public override void PhysicsProcess() {
+        _player._movement.Y += _gravityAcceleration;
         _player._movement.X = 0;
         _player._movement.X += _player.IsKeyPressed("D") ? 1 : 0;
         _player._movement.X += _player.IsKeyPressed("A") ? -1 : 0;
-        _player._movement.X *= _airborneSpeed;
+        _player._movement.X *= _player._speed;
         _player.Position += _player._movement;
     }
 
     public override void Enter() {
-        _player._movement.Y = _jumpForce;
-        // TODO: Switch animation
-        // TODO: Switch to airborne state when animation ends
+        _player._movement.Y = 0;
     }
 }

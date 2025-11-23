@@ -9,6 +9,10 @@ namespace PlayerSystem;
 
 public partial class Player : CharacterBody2D, ITick, IInputState {
     public event Action IncreaseNoiseLevel;
+
+    internal Vector2 _movement =  Vector2.Zero;
+    internal float _speed = 1f;
+    
     private readonly StateMachine<PlayerStateId> _playerStateMachine = new();
     private readonly Dictionary<string, bool> _keyPressed = new();
     
@@ -59,6 +63,7 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
         _playerStateMachine.AddState(PlayerStateId.Idle, new IdleState());
         _playerStateMachine.AddState(PlayerStateId.Running, new RunningState(this));
         _playerStateMachine.AddState(PlayerStateId.Jumping, new JumpingState(this));
+        _playerStateMachine.AddState(PlayerStateId.Falling, new FallingState(this));
 
         _playerStateMachine.SwitchState(PlayerStateId.Running);
     }
