@@ -17,6 +17,10 @@ public class IdleState : PlayerState {
             if (keyDto.Identifier == "Space" && keyDto.Pressed) {
                 _player.SwitchState(PlayerStateId.Jumping);
             }
+
+            if (keyDto.Identifier == "A" && keyDto.Pressed || keyDto.Identifier == "D" && keyDto.Pressed) {
+                _player.SwitchState(PlayerStateId.Moving);
+            }
         }
     }
 

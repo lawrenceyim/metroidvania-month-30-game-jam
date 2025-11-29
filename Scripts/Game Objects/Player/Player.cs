@@ -85,25 +85,28 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 
 	private void _IsOnTerrain() {
 		_terrainCheck.ForceShapecastUpdate();
-		
-		if (!_terrainCheck.IsColliding()) {
-			return;
+		if (_terrainCheck.IsColliding()) {
+			GD.Print("COLLISION WITH SHAPECAST");
 		}
 		
-		GD.Print("Terrain check collisions found");
-
-		for (int i = 0; i < _terrainCheck.GetCollisionCount(); i++) {
-			if (_terrainCheck.GetCollider(i) is StaticBody2D) {
-				GD.Print("Terrain check collider hit");
-				if (movement.IsZeroApprox()) {
-					SwitchState(PlayerStateId.Idle);
-				} else {
-					SwitchState(PlayerStateId.Moving);
-				}
-
-				return;
-			}
-		}
+		// if (!_terrainCheck.IsColliding()) {
+		// 	return;
+		// }
+		//
+		// GD.Print("Terrain check collisions found");
+		//
+		// for (int i = 0; i < _terrainCheck.GetCollisionCount(); i++) {
+		// 	if (_terrainCheck.GetCollider(i) is StaticBody2D) {
+		// 		GD.Print("Terrain check collider hit");
+		// 		if (movement.IsZeroApprox()) {
+		// 			SwitchState(PlayerStateId.Idle);
+		// 		} else {
+		// 			SwitchState(PlayerStateId.Moving);
+		// 		}
+		//
+		// 		return;
+		// 	}
+		// }
 	}
 
 	private void _InitializeStateMachine() {
@@ -112,6 +115,6 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 		_playerStateMachine.AddState(PlayerStateId.Jumping, new JumpingState(this));
 		_playerStateMachine.AddState(PlayerStateId.Falling, new FallingState(this));
 
-		_playerStateMachine.SwitchState(PlayerStateId.Moving);
+		_playerStateMachine.SwitchState(PlayerStateId.Idle);
 	}
 }

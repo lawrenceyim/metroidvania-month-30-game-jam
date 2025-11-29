@@ -28,9 +28,8 @@ public class MovingState : PlayerState {
         _player.movement.X += _player.IsKeyPressed("A") ? -1 : 0;
         _player.movement.X *= _player.movingSpeed;
         
-        GD.Print($"Movement {_player.movement}");
         if (_player.movement.IsZeroApprox()) {
-            _player.SetAnimation(PlayerAnimationId.Idle);
+            _player.SwitchState(PlayerStateId.Idle);
             return;
         }
         
