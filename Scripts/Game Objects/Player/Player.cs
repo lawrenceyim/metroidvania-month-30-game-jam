@@ -8,63 +8,110 @@ using StateMachineSystem;
 namespace PlayerSystem;
 
 public partial class Player : CharacterBody2D, ITick, IInputState {
-    public event Action IncreaseNoiseLevel;
+	public event Action IncreaseNoiseLevel;
 
-    internal Vector2 _movement =  Vector2.Zero;
-    internal float _speed = 1f;
-    
-    private readonly StateMachine<PlayerStateId> _playerStateMachine = new();
-    private readonly Dictionary<string, bool> _keyPressed = new();
-    
-    // refactor these to the active scene rather than the player character itself
-    private InputStateMachine _inputStateMachine;
-    private GameClock _gameClock;
+	internal Vector2 movement = Vector2.Zero;
+	internal float movingSpeed = 5f;
+	internal float gravityForce = .1f;
+	internal float jumpForce = -5f;
 
-    public override void _Ready() {
-        ServiceLocator serviceLocator = GetNode<ServiceLocator>(ServiceLocator.AutoloadPath);
-        _inputStateMachine = serviceLocator.GetService<InputStateMachine>(ServiceName.InputStateMachine);
-        _inputStateMachine.SetState(this);
-        _gameClock = serviceLocator.GetService<GameClock>(ServiceName.GameClock);
-        _gameClock.AddActiveScene(this, GetInstanceId());
-        _InitializeStateMachine();
-    }
+	[Export]
+	private AnimatedSprite2D _sprite;
 
-    public override void _ExitTree() {
-        _inputStateMachine.SetState(null);
-        _gameClock.RemoveActiveScene(GetInstanceId());
-    }
+	[Export]
+	private ShapeCast2D _terrainCheck;
 
-    public void PhysicsTick() {
-        _playerStateMachine.PhysicsProcess();
+	[Export]
+	private CollisionShape2D _hitbox;
 
-        // Main level should have a counter for this. Something like Ticks Per Second * 60 seconds or something
-        if (_playerStateMachine.GetCurrentKey() == PlayerStateId.Running) {
-            IncreaseNoiseLevel?.Invoke();
-        }
-    }
+	private readonly StateMachine<PlayerStateId> _playerStateMachine = new();
+	private readonly Dictionary<string, bool> _keyPressed = new();
 
-    public void SetKeyPressed(string key, bool keyPressed) {
-        _keyPressed[key] = keyPressed;
-    }
+	// refactor these to the active scene rather than the player character itself
+	private InputStateMachine _inputStateMachine;
+	private GameClock _gameClock;
 
-    public bool IsKeyPressed(string key) {
-        return _keyPressed.GetValueOrDefault(key, false);
-    }
+	public override void _Ready() {
+		ServiceLocator serviceLocator = GetNode<ServiceLocator>(ServiceLocator.AutoloadPath);
+		_inputStateMachine = serviceLocator.GetService<InputStateMachine>(ServiceName.InputStateMachine);
+		_inputStateMachine.SetState(this);
+		_gameClock = serviceLocator.GetService<GameClock>(ServiceName.GameClock);
+		_gameClock.AddActiveScene(this, GetInstanceId());
+		_InitializeStateMachine();
+	}
 
-    public void ProcessInput(InputEventDto eventDto) {
-        _playerStateMachine?.Input(eventDto);
-    }
+	public override void _ExitTree() {
+		_inputStateMachine.SetState(null);
+		_gameClock.RemoveActiveScene(GetInstanceId());
+	}
 
-    public void SwitchState(PlayerStateId newState) {
-        _playerStateMachine.SwitchState(newState);
-    }
+	public void PhysicsTick() {
+		_playerStateMachine.PhysicsProcess();
 
-    private void _InitializeStateMachine() {
-        _playerStateMachine.AddState(PlayerStateId.Idle, new IdleState());
-        _playerStateMachine.AddState(PlayerStateId.Running, new RunningState(this));
-        _playerStateMachine.AddState(PlayerStateId.Jumping, new JumpingState(this));
-        _playerStateMachine.AddState(PlayerStateId.Falling, new FallingState(this));
+		// Main level should have a counter for this. Something like Ticks Per Second * 60 seconds or something
+		if (_playerStateMachine.GetCurrentKey() == PlayerStateId.Moving) {
+			IncreaseNoiseLevel?.Invoke();
+		}
+	}
 
-        _playerStateMachine.SwitchState(PlayerStateId.Running);
-    }
+	public void SetKeyPressed(string key, bool keyPressed) {
+		_keyPressed[key] = keyPressed;
+	}
+
+	public bool IsKeyPressed(string key) {
+		return _keyPressed.GetValueOrDefault(key, false);
+	}
+
+	public void ProcessInput(InputEventDto eventDto) {
+		_playerStateMachine?.Input(eventDto);
+	}
+
+	public void SwitchState(PlayerStateId newState) {
+		_playerStateMachine.SwitchState(newState);
+	}
+
+	public void SetAnimation(PlayerAnimationId id) {
+		string animationName = id switch {
+			PlayerAnimationId.Idle => "Idle",
+			PlayerAnimationId.Moving => "Move",
+		};
+		// GD.Print($"Setting animation: {animationName}");
+		_sprite.SetAnimation(animationName);
+	}
+
+	public void SetDirectionFaced(bool facingRight) {
+		_sprite.FlipH = !facingRight;
+	}
+
+	private void _IsOnTerrain() {
+		_terrainCheck.ForceShapecastUpdate();
+		
+		if (!_terrainCheck.IsColliding()) {
+			return;
+		}
+		
+		GD.Print("Terrain check collisions found");
+
+		for (int i = 0; i < _terrainCheck.GetCollisionCount(); i++) {
+			if (_terrainCheck.GetCollider(i) is StaticBody2D) {
+				GD.Print("Terrain check collider hit");
+				if (movement.IsZeroApprox()) {
+					SwitchState(PlayerStateId.Idle);
+				} else {
+					SwitchState(PlayerStateId.Moving);
+				}
+
+				return;
+			}
+		}
+	}
+
+	private void _InitializeStateMachine() {
+		_playerStateMachine.AddState(PlayerStateId.Idle, new IdleState(this));
+		_playerStateMachine.AddState(PlayerStateId.Moving, new MovingState(this));
+		_playerStateMachine.AddState(PlayerStateId.Jumping, new JumpingState(this));
+		_playerStateMachine.AddState(PlayerStateId.Falling, new FallingState(this));
+
+		_playerStateMachine.SwitchState(PlayerStateId.Moving);
+	}
 }

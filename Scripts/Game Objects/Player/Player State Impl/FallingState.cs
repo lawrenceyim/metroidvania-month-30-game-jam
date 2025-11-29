@@ -1,9 +1,9 @@
+using Godot;
 using InputSystem;
 using PlayerSystem;
 
 public class FallingState : PlayerState {
     private Player _player;
-    private readonly float _gravityAcceleration = 0.05f;
 
     public FallingState(Player player) {
         _player = player;
@@ -20,15 +20,19 @@ public class FallingState : PlayerState {
     public override void Process(double delta) { }
 
     public override void PhysicsProcess() {
-        _player._movement.Y += _gravityAcceleration;
-        _player._movement.X = 0;
-        _player._movement.X += _player.IsKeyPressed("D") ? 1 : 0;
-        _player._movement.X += _player.IsKeyPressed("A") ? -1 : 0;
-        _player._movement.X *= _player._speed;
-        _player.Position += _player._movement;
+        _player.movement.Y += _player.gravityForce;
+        _player.movement.X = 0;
+        _player.movement.X += _player.IsKeyPressed("D") ? 1 : 0;
+        _player.movement.X += _player.IsKeyPressed("A") ? -1 : 0;
+        _player.movement.X *= _player.movingSpeed;
+        _player.MoveAndCollide(_player.movement);
+        _player.SetDirectionFaced(_player.movement.X > 0);
     }
 
     public override void Enter() {
-        _player._movement.Y = 0;
+        GD.Print("Entering Falling State");
+        _player.movement.Y = 0;
+        _player.SetAnimation(PlayerAnimationId.Idle);
+        
     }
 }
