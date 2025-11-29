@@ -60,7 +60,7 @@ size = Vector2(14, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xfpj1"]
 size = Vector2(15, 1)
 
-[node name="CharacterBody2D" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_terrainCheck", "_hitbox")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_terrainCheck", "_hitbox")]
 script = ExtResource("1_xfpj1")
 _sprite = NodePath("AnimatedSprite2D")
 _terrainCheck = NodePath("ShapeCast2D")
