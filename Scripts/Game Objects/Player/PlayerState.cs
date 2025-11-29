@@ -11,4 +11,6 @@ public abstract class PlayerState : IState {
     public abstract void Enter();
 
     public abstract void Exit();
+    
+    public abstract void IsGrounded(bool isGrounded);
 }

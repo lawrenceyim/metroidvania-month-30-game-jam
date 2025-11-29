@@ -27,14 +27,13 @@ public class MovingState : PlayerState {
         _player.movement.X += _player.IsKeyPressed("D") ? 1 : 0;
         _player.movement.X += _player.IsKeyPressed("A") ? -1 : 0;
         _player.movement.X *= _player.movingSpeed;
-        
+
         if (_player.movement.IsZeroApprox()) {
             _player.SwitchState(PlayerStateId.Idle);
             return;
         }
-        
-        _player.MoveAndCollide(_player.movement);
-        _player.SetDirectionFaced(_player.movement.X > 0);
+
+        _player.MoveCharacter();
     }
 
     public override void Enter() {
@@ -43,4 +42,9 @@ public class MovingState : PlayerState {
     }
 
     public override void Exit() { }
+    public override void IsGrounded(bool isGrounded) {
+        if (!isGrounded) {
+            _player.SwitchState(PlayerStateId.Falling);
+        }
+    }
 }

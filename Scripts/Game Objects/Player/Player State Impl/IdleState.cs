@@ -26,7 +26,11 @@ public class IdleState : PlayerState {
 
     public override void Process(double delta) { }
 
-    public override void PhysicsProcess() { }
+    public override void PhysicsProcess() {
+        if (_player.IsKeyPressed("A") || _player.IsKeyPressed("D")) {
+            _player.SwitchState(PlayerStateId.Moving);
+        }
+    }
 
     public override void Enter() {
         GD.Print("Entering Idle State");
@@ -34,4 +38,9 @@ public class IdleState : PlayerState {
     }
 
     public override void Exit() { }
+    public override void IsGrounded(bool isGrounded) {
+        if (!isGrounded) {
+            _player.SwitchState(PlayerStateId.Falling);
+        }
+    }
 }

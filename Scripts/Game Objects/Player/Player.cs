@@ -11,9 +11,9 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 	public event Action IncreaseNoiseLevel;
 
 	internal Vector2 movement = Vector2.Zero;
-	internal float movingSpeed = 5f;
+	internal float movingSpeed = 3f;
 	internal float gravityForce = .1f;
-	internal float jumpForce = -5f;
+	internal float jumpForce = -2f;
 
 	[Export]
 	private AnimatedSprite2D _sprite;
@@ -24,12 +24,13 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 	[Export]
 	private CollisionShape2D _hitbox;
 
-	private readonly StateMachine<PlayerStateId> _playerStateMachine = new();
+	private readonly PlayerStateMachine _playerStateMachine = new();
 	private readonly Dictionary<string, bool> _keyPressed = new();
 
 	// refactor these to the active scene rather than the player character itself
 	private InputStateMachine _inputStateMachine;
 	private GameClock _gameClock;
+	private TickTimer _groundCheckCooldown;
 
 	public override void _Ready() {
 		ServiceLocator serviceLocator = GetNode<ServiceLocator>(ServiceLocator.AutoloadPath);
@@ -52,6 +53,8 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 		if (_playerStateMachine.GetCurrentKey() == PlayerStateId.Moving) {
 			IncreaseNoiseLevel?.Invoke();
 		}
+
+		_IsOnTerrain();
 	}
 
 	public void SetKeyPressed(string key, bool keyPressed) {
@@ -83,30 +86,30 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 		_sprite.FlipH = !facingRight;
 	}
 
+	public void MoveCharacter() {
+		Velocity = movement * Engine.PhysicsTicksPerSecond;
+		MoveAndSlide();
+		if (movement.X > 0) {
+			SetDirectionFaced(true);
+		} else if (movement.X < 0) {
+			SetDirectionFaced(false);
+		}
+	}
+
 	private void _IsOnTerrain() {
 		_terrainCheck.ForceShapecastUpdate();
-		if (_terrainCheck.IsColliding()) {
-			GD.Print("COLLISION WITH SHAPECAST");
+
+		if (!_terrainCheck.IsColliding()) {
+			_playerStateMachine.IsGrounded(false);
+			return;
 		}
-		
-		// if (!_terrainCheck.IsColliding()) {
-		// 	return;
-		// }
-		//
-		// GD.Print("Terrain check collisions found");
-		//
-		// for (int i = 0; i < _terrainCheck.GetCollisionCount(); i++) {
-		// 	if (_terrainCheck.GetCollider(i) is StaticBody2D) {
-		// 		GD.Print("Terrain check collider hit");
-		// 		if (movement.IsZeroApprox()) {
-		// 			SwitchState(PlayerStateId.Idle);
-		// 		} else {
-		// 			SwitchState(PlayerStateId.Moving);
-		// 		}
-		//
-		// 		return;
-		// 	}
-		// }
+
+		for (int i = 0; i < _terrainCheck.GetCollisionCount(); i++) {
+			if (_terrainCheck.GetCollider(i) is StaticBody2D) {
+				_playerStateMachine.IsGrounded(true);
+				return;
+			}
+		}
 	}
 
 	private void _InitializeStateMachine() {
