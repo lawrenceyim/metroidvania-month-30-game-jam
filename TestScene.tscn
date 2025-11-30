@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cgp8oa7wdafj3"]
+[gd_scene load_steps=6 format=3 uid="uid://cgp8oa7wdafj3"]
 
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://Assets/Sprites/icon.svg" id="1_mncer"]
 [ext_resource type="PackedScene" uid="uid://c5oea303t02br" path="res://Scenes/Player/PlayerCharacter.tscn" id="2_cguwc"]
 [ext_resource type="PackedScene" uid="uid://de3eikfyxt0bl" path="res://Scenes/Enemies/Slime.tscn" id="3_wicfy"]
+[ext_resource type="PackedScene" uid="uid://ihcxp8lk1gei" path="res://Scenes/Enemies/Bat.tscn" id="4_go42g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cguwc"]
 size = Vector2(128, 128)
@@ -30,3 +31,7 @@ collision_layer = 0
 collision_mask = 0
 _leftPosition = 200.0
 _rightPosition = 400.0
+
+[node name="Bat" parent="." instance=ExtResource("4_go42g")]
+position = Vector2(193, -171)
+_patrolPoint = Vector2(300, -150)

@@ -25,7 +25,7 @@ public partial class Slime : CharacterBody2D, ITick {
     private void _HandleCollision(Node2D body) {
         if (body is Player player) {
             // TODO: kill player
-            GD.Print("Killed player");
+            GD.Print("Slime killed player");
         }
     }
 
