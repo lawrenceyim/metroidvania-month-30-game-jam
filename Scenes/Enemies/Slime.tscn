@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://de3eikfyxt0bl"]
+[gd_scene load_steps=17 format=3 uid="uid://de3eikfyxt0bl"]
 
 [ext_resource type="Script" uid="uid://cpioyvs2gkd8a" path="res://Scripts/Game Objects/Enemies/Slimes/Slime.cs" id="1_jvx6n"]
 [ext_resource type="Texture2D" uid="uid://c78rax5i8i3yw" path="res://Assets/Sprites/Spritesheet.png" id="2_kexyb"]
@@ -139,8 +139,12 @@ _data = {
 &"RESET": SubResource("Animation_kexyb")
 }
 
-[node name="Slime" type="CharacterBody2D"]
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_kexyb"]
+height = 24.0
+
+[node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("_hitbox")]
 script = ExtResource("1_jvx6n")
+_hitbox = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3)
@@ -155,3 +159,9 @@ frame = 1
 libraries = {
 &"": SubResource("AnimationLibrary_s88bi")
 }
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_kexyb")

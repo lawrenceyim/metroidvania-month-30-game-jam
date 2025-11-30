@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://cgp8oa7wdafj3"]
+[gd_scene load_steps=5 format=3 uid="uid://cgp8oa7wdafj3"]
 
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://Assets/Sprites/icon.svg" id="1_mncer"]
 [ext_resource type="PackedScene" uid="uid://c5oea303t02br" path="res://Scenes/Player/PlayerCharacter.tscn" id="2_cguwc"]
+[ext_resource type="PackedScene" uid="uid://de3eikfyxt0bl" path="res://Scenes/Enemies/Slime.tscn" id="3_wicfy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cguwc"]
 size = Vector2(128, 128)
@@ -9,6 +10,8 @@ size = Vector2(128, 128)
 [node name="Node2D" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(215.5, 0)
+scale = Vector2(4.3671875, 1)
 texture = ExtResource("1_mncer")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Sprite2D"]
@@ -20,3 +23,10 @@ shape = SubResource("RectangleShape2D_cguwc")
 
 [node name="CharacterBody2D" parent="." instance=ExtResource("2_cguwc")]
 position = Vector2(-7, -123)
+
+[node name="Slime" parent="." instance=ExtResource("3_wicfy")]
+position = Vector2(327, -81)
+collision_layer = 0
+collision_mask = 0
+_leftPosition = Vector2(97, -78)
+_rightPosition = Vector2(380, -78)
