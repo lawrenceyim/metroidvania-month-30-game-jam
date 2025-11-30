@@ -1,12 +1,13 @@
+using System;
 using Godot;
 using PlayerSystem;
 
 public partial class Slime : CharacterBody2D, ITick {
     [Export]
-    private Vector2 _leftPosition;
+    private float _leftPosition;
 
     [Export]
-    private Vector2 _rightPosition;
+    private float _rightPosition;
 
     [Export]
     private bool _movingRight;
@@ -16,7 +17,6 @@ public partial class Slime : CharacterBody2D, ITick {
 
     private float _moveSpeed = 2f * Engine.PhysicsTicksPerSecond;
     private Vector2 _movement = Vector2.Zero;
-    private float _distanceThreshold = 10f;
 
     public override void _Ready() {
         _hitbox.BodyEntered += _HandleCollision;
@@ -40,11 +40,11 @@ public partial class Slime : CharacterBody2D, ITick {
         MoveAndSlide();
 
         if (_movingRight) {
-            if (_rightPosition.DistanceTo(Position) <= _distanceThreshold) {
+            if (Position.X >= _rightPosition) {
                 _movingRight = false;
             }
         } else {
-            if (_leftPosition.DistanceTo(Position) <= _distanceThreshold) {
+            if (Position.X <= _leftPosition) {
                 _movingRight = true;
             }
         }

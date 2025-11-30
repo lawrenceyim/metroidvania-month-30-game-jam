@@ -28,5 +28,5 @@ position = Vector2(-7, -123)
 position = Vector2(327, -81)
 collision_layer = 0
 collision_mask = 0
-_leftPosition = Vector2(97, -78)
-_rightPosition = Vector2(380, -78)
+_leftPosition = 200.0
+_rightPosition = 400.0
