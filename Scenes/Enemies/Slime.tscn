@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://de3eikfyxt0bl"]
 
-[ext_resource type="Script" uid="uid://cpioyvs2gkd8a" path="res://Scripts/Game Objects/Enemies/Slimes/Slime.cs" id="1_jvx6n"]
+[ext_resource type="Script" uid="uid://cpioyvs2gkd8a" path="res://Scripts/Game Objects/Enemies/Slime.cs" id="1_kexyb"]
 [ext_resource type="Texture2D" uid="uid://c78rax5i8i3yw" path="res://Assets/Sprites/Spritesheet.png" id="2_kexyb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kexyb"]
@@ -143,7 +143,7 @@ _data = {
 height = 24.0
 
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("_hitbox")]
-script = ExtResource("1_jvx6n")
+script = ExtResource("1_kexyb")
 _hitbox = NodePath("Area2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

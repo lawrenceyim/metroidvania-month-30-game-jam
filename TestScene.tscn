@@ -34,4 +34,4 @@ _rightPosition = 400.0
 
 [node name="Bat" parent="." instance=ExtResource("4_go42g")]
 position = Vector2(193, -171)
-_patrolPoint = Vector2(300, -150)
+_patrolPoint = PackedVector2Array(200, -170, 600, -170, 600, -250, 200, -250)
