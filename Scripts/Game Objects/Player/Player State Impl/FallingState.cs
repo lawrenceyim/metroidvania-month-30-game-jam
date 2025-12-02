@@ -13,6 +13,7 @@ public class FallingState : PlayerState {
 
     public override void IsGrounded(bool isGrounded) {
         if (isGrounded) {
+            _player.movement.Y = 0;
             _player.SwitchState(PlayerStateId.Idle);
         }
     }

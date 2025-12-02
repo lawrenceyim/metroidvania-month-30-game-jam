@@ -27,7 +27,7 @@ public class MovingState : PlayerState {
         _player.movement.X += _player.IsKeyPressed("D") ? 1 : 0;
         _player.movement.X += _player.IsKeyPressed("A") ? -1 : 0;
         _player.movement.X *= _player.movingSpeed;
-
+        
         if (_player.movement.IsZeroApprox()) {
             _player.SwitchState(PlayerStateId.Idle);
             return;

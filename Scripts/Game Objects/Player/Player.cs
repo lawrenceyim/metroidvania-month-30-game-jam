@@ -38,6 +38,7 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 		_gameClock = serviceLocator.GetService<GameClock>(ServiceName.GameClock);
 		_gameClock.AddActiveScene(this, GetInstanceId());
 		_InitializeStateMachine();
+		_sprite.Play();
 	}
 
 	public override void _ExitTree() {
@@ -100,12 +101,10 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 
 		if (!_terrainCheck.IsColliding()) {
 			_playerStateMachine.IsGrounded(false);
-			GD.Print("NO Collision");
 			return;
 		}
 		
 		_playerStateMachine.IsGrounded(true);
-		GD.Print("Collision");
 		//
 		// for (int i = 0; i < _terrainCheck.GetCollisionCount(); i++) {
 		// 	if (_terrainCheck.GetCollider(i).) {

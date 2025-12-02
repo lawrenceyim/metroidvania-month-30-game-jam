@@ -70,6 +70,7 @@ _hitbox = NodePath("AnimatedSprite2D/Area2D/Hitbox")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xfpj1")
 animation = &"Idle"
+frame_progress = 0.6164203
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
 collision_layer = 2

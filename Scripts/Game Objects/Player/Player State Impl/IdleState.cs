@@ -38,6 +38,7 @@ public class IdleState : PlayerState {
     }
 
     public override void Exit() { }
+    
     public override void IsGrounded(bool isGrounded) {
         if (!isGrounded) {
             _player.SwitchState(PlayerStateId.Falling);
