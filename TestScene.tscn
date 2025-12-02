@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://cgp8oa7wdafj3"]
+[gd_scene load_steps=7 format=3 uid="uid://cgp8oa7wdafj3"]
 
 [ext_resource type="Texture2D" uid="uid://4q335xxs2p" path="res://Assets/Sprites/icon.svg" id="1_mncer"]
 [ext_resource type="PackedScene" uid="uid://c5oea303t02br" path="res://Scenes/Player/PlayerCharacter.tscn" id="2_cguwc"]
 [ext_resource type="PackedScene" uid="uid://de3eikfyxt0bl" path="res://Scenes/Enemies/Slime.tscn" id="3_wicfy"]
 [ext_resource type="PackedScene" uid="uid://ihcxp8lk1gei" path="res://Scenes/Enemies/Bat.tscn" id="4_go42g"]
+[ext_resource type="PackedScene" uid="uid://bv0tqycp5rhj8" path="res://Scenes/Enemies/Ghost.tscn" id="5_sreuk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cguwc"]
 size = Vector2(128, 128)
@@ -22,9 +23,6 @@ position = Vector2(-55, -54)
 position = Vector2(55, 54)
 shape = SubResource("RectangleShape2D_cguwc")
 
-[node name="CharacterBody2D" parent="." instance=ExtResource("2_cguwc")]
-position = Vector2(-7, -123)
-
 [node name="Slime" parent="." instance=ExtResource("3_wicfy")]
 position = Vector2(327, -81)
 collision_layer = 0
@@ -35,3 +33,10 @@ _rightPosition = 400.0
 [node name="Bat" parent="." instance=ExtResource("4_go42g")]
 position = Vector2(193, -171)
 _patrolPoint = PackedVector2Array(200, -170, 600, -170, 600, -250, 200, -250)
+
+[node name="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("5_sreuk")]
+position = Vector2(270, -198)
+_player = NodePath("../Player")
+
+[node name="Player" parent="." instance=ExtResource("2_cguwc")]
+position = Vector2(17, -103)

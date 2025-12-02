@@ -18,8 +18,7 @@ public partial class Bat : AnimatedSprite2D, ITick {
 
     private State _state = State.Patrol;
     private int _maxPatrolDistance = 50;
-    private float _moveSpeed = 6000f / Engine.PhysicsTicksPerSecond;
-    private float _delta = 1f / Engine.PhysicsTicksPerSecond;
+    private float _moveSpeed = 100f / Engine.PhysicsTicksPerSecond;
     private float _patrolThreshold = 5;
 
     public override void _Ready() {
@@ -59,7 +58,7 @@ public partial class Bat : AnimatedSprite2D, ITick {
             return;
         }
         
-        Position = Position.MoveToward(_patrolPoint[_currentPatrolPoint], _moveSpeed * _delta);
+        Position = Position.MoveToward(_patrolPoint[_currentPatrolPoint], _moveSpeed);
     }
 
     private void _PursueTick() { }
