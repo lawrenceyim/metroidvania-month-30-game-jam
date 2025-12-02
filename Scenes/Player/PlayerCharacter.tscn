@@ -61,6 +61,7 @@ size = Vector2(14, 26)
 size = Vector2(12, 1)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_terrainCheck", "_hitbox")]
+collision_layer = 3
 floor_stop_on_slope = false
 script = ExtResource("1_xfpj1")
 _sprite = NodePath("AnimatedSprite2D")
@@ -70,7 +71,7 @@ _hitbox = NodePath("AnimatedSprite2D/Area2D/Hitbox")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xfpj1")
 animation = &"Idle"
-frame_progress = 0.6164203
+frame_progress = 0.947449
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
 collision_layer = 2
