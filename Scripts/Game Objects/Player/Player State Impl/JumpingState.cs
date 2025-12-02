@@ -42,7 +42,7 @@ public class JumpingState : PlayerState {
     public override void Enter() {
         GD.Print("Entering Jumping State");
         _player.movement.Y = _player.jumpForce;
-        _durationTicksLeft = (int)(.5f * Engine.PhysicsTicksPerSecond); // TODO: Temporary fix
+        _durationTicksLeft = (int)(.3f * Engine.PhysicsTicksPerSecond); // TODO: Temporary fix
         _player.SetAnimation(PlayerAnimationId.Idle);
 
         // TODO: Switch animation

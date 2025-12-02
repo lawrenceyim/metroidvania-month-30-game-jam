@@ -12,7 +12,7 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 	internal Vector2 movement = Vector2.Zero;
 	internal float movingSpeed = 3f;
 	internal float gravityForce = .1f;
-	internal float jumpForce = -2f;
+	internal float jumpForce = -300 / Engine.PhysicsTicksPerSecond;
 
 	[Export]
 	private AnimatedSprite2D _sprite;
@@ -100,15 +100,19 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 
 		if (!_terrainCheck.IsColliding()) {
 			_playerStateMachine.IsGrounded(false);
+			GD.Print("NO Collision");
 			return;
 		}
-
-		for (int i = 0; i < _terrainCheck.GetCollisionCount(); i++) {
-			if (_terrainCheck.GetCollider(i) is StaticBody2D) {
-				_playerStateMachine.IsGrounded(true);
-				return;
-			}
-		}
+		
+		_playerStateMachine.IsGrounded(true);
+		GD.Print("Collision");
+		//
+		// for (int i = 0; i < _terrainCheck.GetCollisionCount(); i++) {
+		// 	if (_terrainCheck.GetCollider(i).) {
+		// 		_playerStateMachine.IsGrounded(true);
+		// 		return;
+		// 	}
+		// }
 	}
 
 	private void _InitializeStateMachine() {
