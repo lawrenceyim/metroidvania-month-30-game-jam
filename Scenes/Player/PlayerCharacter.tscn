@@ -1,10 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://c5oea303t02br"]
+[gd_scene load_steps=14 format=3 uid="uid://c5oea303t02br"]
 
 [ext_resource type="Script" uid="uid://ch10jmxpv4oso" path="res://Scripts/Game Objects/Player/Player.cs" id="1_xfpj1"]
 [ext_resource type="Texture2D" uid="uid://c78rax5i8i3yw" path="res://Assets/Sprites/Spritesheet.png" id="2_xfpj1"]
+[ext_resource type="Texture2D" uid="uid://d3ywvyatodq3o" path="res://Assets/Sprites/Player Jump.png" id="3_q1ate"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q1ate"]
 atlas = ExtResource("2_xfpj1")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m8fkx"]
+atlas = ExtResource("3_q1ate")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cn5ci"]
@@ -31,6 +36,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"Idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m8fkx")
+}],
+"loop": true,
+"name": &"Jump",
 "speed": 5.0
 }, {
 "frames": [{
@@ -70,8 +83,7 @@ _hitbox = NodePath("AnimatedSprite2D/Area2D/Hitbox")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xfpj1")
-animation = &"Idle"
-frame_progress = 0.947449
+animation = &"Jump"
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
 collision_layer = 2

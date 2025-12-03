@@ -77,6 +77,7 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
 		string animationName = id switch {
 			PlayerAnimationId.Idle => "Idle",
 			PlayerAnimationId.Moving => "Move",
+			PlayerAnimationId.Jump => "Jump",
 		};
 		// GD.Print($"Setting animation: {animationName}");
 		_sprite.SetAnimation(animationName);
