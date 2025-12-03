@@ -20,7 +20,11 @@ public partial class Hazard : Sprite2D {
         if (body is Player) {
             // TODO: Kill player
             GD.Print("Spike killed player");
-            _sceneManager.ChangeToCurrentScene();
+            CallDeferred(nameof(_ResetScene));
         }
+    }
+
+    private void _ResetScene() {
+        _sceneManager.ChangeToCurrentScene();
     }
 }
