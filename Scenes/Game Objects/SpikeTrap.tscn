@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://b34ikfabbu0ri"]
+
+[ext_resource type="Texture2D" uid="uid://cxcubc6n4syib" path="res://Assets/Sprites/Tileset.png" id="1_m1cun"]
+[ext_resource type="Script" uid="uid://b78qqxhavrus5" path="res://Scripts/Game Objects/Hazard/Hazard.cs" id="2_kfy86"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_m1cun"]
+size = Vector2(32, 20)
+
+[node name="Spike" type="Sprite2D" node_paths=PackedStringArray("_area2D")]
+texture = ExtResource("1_m1cun")
+centered = false
+offset = Vector2(-16, -16)
+region_enabled = true
+region_rect = Rect2(32, 512, 32, 32)
+script = ExtResource("2_kfy86")
+_area2D = NodePath("Area2D")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(0, 6)
+shape = SubResource("RectangleShape2D_m1cun")
