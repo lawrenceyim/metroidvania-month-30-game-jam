@@ -1,6 +1,7 @@
-[gd_scene load_steps=9 format=4 uid="uid://t6824w52eco8"]
+[gd_scene load_steps=11 format=4 uid="uid://t6824w52eco8"]
 
 [ext_resource type="Texture2D" uid="uid://cxcubc6n4syib" path="res://Assets/Sprites/Tileset.png" id="1_0ba56"]
+[ext_resource type="PackedScene" uid="uid://b6ft8sa3x5mcx" path="res://Scenes/Background Objects/BlinkingWindow.tscn" id="2_8rbpu"]
 [ext_resource type="PackedScene" uid="uid://c5oea303t02br" path="res://Scenes/Player/PlayerCharacter.tscn" id="2_vsvp5"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_vsvp5"]
@@ -279,9 +280,13 @@ texture_region_size = Vector2i(32, 32)
 1:16/0 = 0
 2:16/0 = 0
 
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_fuudy"]
+scenes/1/scene = ExtResource("2_8rbpu")
+
 [sub_resource type="TileSet" id="TileSet_ienac"]
 tile_size = Vector2i(32, 32)
 sources/1 = SubResource("TileSetAtlasSource_tj5wv")
+sources/2 = SubResource("TileSetScenesCollectionSource_fuudy")
 
 [node name="Level" type="Node2D"]
 
@@ -299,7 +304,7 @@ tile_set = SubResource("TileSet_xylue")
 
 [node name="TileMapLayer3" type="TileMapLayer" parent="TileMap"]
 z_index = -8
-tile_map_data = PackedByteArray("AAABAAEAAQABAAQAAAAFAAEAAQADAAQAAAAFAAIAAQADAAUAAAAIAAEAAQADAAQAAAAHAAMAAQALAAAAAAAHAAQAAQALAAEAAAACAAMAAQALAAAAAAACAAQAAQALAAEAAAAMAAMAAQALAAAAAAAMAAQAAQALAAEAAAARAAMAAQALAAAAAAARAAQAAQALAAEAAAAMAAcAAQANAAAAAAAHAAcAAQANAAAAAAACAAcAAQANAAAAAAARAAcAAQANAAAAAAARAAkAAQADAAsAAAAHAAkAAQADAAsAAAA=")
+tile_map_data = PackedByteArray("AAABAAEAAQABAAQAAAAFAAEAAQADAAQAAAAFAAIAAQADAAUAAAAIAAEAAQADAAQAAAAHAAMAAQALAAAAAAAHAAQAAQALAAEAAAACAAMAAQALAAAAAAACAAQAAQALAAEAAAAMAAMAAgAAAAAAAQAMAAQAAQALAAEAAAARAAMAAQALAAAAAAARAAQAAQALAAEAAAAMAAcAAQANAAAAAAAHAAcAAQANAAAAAAACAAcAAQANAAAAAAARAAcAAQANAAAAAAARAAkAAQADAAsAAAAHAAkAAQADAAsAAAA=")
 tile_set = SubResource("TileSet_ienac")
 
 [node name="Player" parent="." instance=ExtResource("2_vsvp5")]
