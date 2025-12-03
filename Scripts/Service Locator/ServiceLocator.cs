@@ -33,8 +33,10 @@ public partial class ServiceLocator : Node, IAutoload {
         AddService(ServiceName.RepositoryLocator, repositoryLocator, true);
 
         PlayerDataRepository playerDataRepository = repositoryLocator.GetRepository<PlayerDataRepository>(RepositoryName.PlayerData);
+        SceneRepository sceneRepository = repositoryLocator.GetRepository<SceneRepository>(RepositoryName.Scene);
         AddService(ServiceName.GameClock, new GameClock(), true);
         AddService(ServiceName.InputStateMachine, new InputStateMachine(), true);
         AddService(ServiceName.PlayerData, new PlayerDataService(playerDataRepository), false);
+        AddService(ServiceName.SceneManager, new SceneManager(sceneRepository), false);
     }
 }
