@@ -1,6 +1,7 @@
 using System;
 using Godot;
 using PlayerSystem;
+using ServiceSystem;
 
 public partial class Slime : CharacterBody2D, ITick {
 	[Export]
@@ -17,17 +18,23 @@ public partial class Slime : CharacterBody2D, ITick {
 
 	private float _moveSpeed = 6000f / Engine.PhysicsTicksPerSecond;
 	private Vector2 _movement = Vector2.Zero;
+	private SceneManager _sceneManager;
 
 	public override void _Ready() {
+		ServiceLocator serviceLocator = GetNode<ServiceLocator>(ServiceLocator.AutoloadPath);
+		_sceneManager = serviceLocator.GetService<SceneManager>(ServiceName.SceneManager);
 		_hitbox.BodyEntered += _HandleCollision;
-		GD.Print(_moveSpeed);
 	}
 
 	private void _HandleCollision(Node2D body) {
 		if (body is Player player) {
-			// TODO: kill player
 			GD.Print("Slime killed player");
+			CallDeferred(nameof(_ResetScene));
 		}
+	}
+
+	private void _ResetScene() {
+		_sceneManager.ChangeToCurrentScene();
 	}
 
 	public override void _PhysicsProcess(double delta) {

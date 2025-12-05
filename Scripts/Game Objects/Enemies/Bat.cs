@@ -33,7 +33,6 @@ public partial class Bat : AnimatedSprite2D, ITick {
 
     private void _HandleCollision(Node2D body) {
         if (body is Player) {
-            // TODO: Kill player
             GD.Print("Bat killed player");
             CallDeferred(nameof(_ResetScene));
         }

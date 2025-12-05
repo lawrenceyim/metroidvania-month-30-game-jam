@@ -1,5 +1,6 @@
 using Godot;
 using PlayerSystem;
+using ServiceSystem;
 
 public partial class Ghost : AnimatedSprite2D, ITick {
 	[Export]
@@ -9,9 +10,12 @@ public partial class Ghost : AnimatedSprite2D, ITick {
 	private Player _player;
 
 	private float _moveSpeed = 30f / Engine.PhysicsTicksPerSecond;
+	private SceneManager _sceneManager;
 
 	public override void _Ready() {
 		base._Ready();
+		ServiceLocator serviceLocator = GetNode<ServiceLocator>(ServiceLocator.AutoloadPath);
+		_sceneManager = serviceLocator.GetService<SceneManager>(ServiceName.SceneManager);
 		_hitbox.BodyEntered += _HandleCollision;
 		GD.Print($"Player found {_player != null}");
 		Play();
@@ -24,9 +28,13 @@ public partial class Ghost : AnimatedSprite2D, ITick {
 
 	private void _HandleCollision(Node2D body) {
 		if (body is Player) {
-			// kill player
 			GD.Print("Ghost killed player");
+			CallDeferred(nameof(_ResetScene));
 		}
+	}
+
+	private void _ResetScene() {
+		_sceneManager.ChangeToCurrentScene();
 	}
 
 	public void PhysicsTick() {

@@ -154,6 +154,7 @@ shape = SubResource("RectangleShape2D_kexyb")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_qvstw")
 animation = &"Move"
+autoplay = "Move"
 frame = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
