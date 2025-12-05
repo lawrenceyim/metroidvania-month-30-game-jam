@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cusb6enla0imq"
+path="res://.godot/imported/Castle Interior_Single Loop_FINAL_12.5.25.wav-d61f582d5c288be3d4184acdd8d572a4.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/Castle Interior_Single Loop_FINAL_12.5.25.wav"
+dest_files=["res://.godot/imported/Castle Interior_Single Loop_FINAL_12.5.25.wav-d61f582d5c288be3d4184acdd8d572a4.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

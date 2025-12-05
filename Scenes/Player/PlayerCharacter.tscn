@@ -71,7 +71,7 @@ size = Vector2(18, 26)
 size = Vector2(14, 26)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xfpj1"]
-size = Vector2(12, 1)
+size = Vector2(14, 1)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_terrainCheck", "_hitbox")]
 collision_layer = 3
