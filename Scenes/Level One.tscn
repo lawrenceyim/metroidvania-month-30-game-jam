@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=4 uid="uid://t6824w52eco8"]
+[gd_scene load_steps=6 format=4 uid="uid://t6824w52eco8"]
 
 [ext_resource type="Script" uid="uid://2ndkouxlodec" path="res://Scripts/Scenes/GameLevel.cs" id="1_wpeww"]
 [ext_resource type="TileSet" uid="uid://j887u0w74wgl" path="res://Assets/Tilesets/MainTileSet.tres" id="2_tm3c5"]
 [ext_resource type="AudioStream" uid="uid://cusb6enla0imq" path="res://Assets/Audio/Castle Interior_Single Loop_FINAL_12.5.25.wav" id="4_mmujx"]
+[ext_resource type="PackedScene" uid="uid://ihcxp8lk1gei" path="res://Scenes/Enemies/Bat.tscn" id="4_wpeww"]
 [ext_resource type="PackedScene" uid="uid://c5oea303t02br" path="res://Scenes/Player/PlayerCharacter.tscn" id="5_tovyt"]
 
 [node name="Level" type="Node2D"]
@@ -32,6 +33,12 @@ tile_set = ExtResource("2_tm3c5")
 
 [node name="Player" parent="." instance=ExtResource("5_tovyt")]
 position = Vector2(49, 264)
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Bat" parent="Enemies" instance=ExtResource("4_wpeww")]
+position = Vector2(201, 121)
+_patrolPoint = PackedVector2Array(190, 120, 285, 120)
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_mmujx")
