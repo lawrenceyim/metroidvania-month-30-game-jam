@@ -143,7 +143,7 @@ _data = {
 height = 24.0
 
 [node name="Slime" type="CharacterBody2D" node_paths=PackedStringArray("_hitbox")]
-collision_mask = 2
+collision_mask = 0
 script = ExtResource("1_kexyb")
 _hitbox = NodePath("Area2D")
 
@@ -163,6 +163,7 @@ libraries = {
 }
 
 [node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 4)
