@@ -15,7 +15,6 @@ public partial class SceneRepository : Node, IAutoload, IRepository {
 
 public enum SceneId {
 	MainMenu = 0,
-	MainLevel = 1,
-	EndOfDay = 2,
-	GameOver = 3,
+	LevelOne = 1001,
+	LevelTwo = 1002,
 }

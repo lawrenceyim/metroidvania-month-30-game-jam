@@ -1,0 +1,30 @@
+[gd_scene load_steps=7 format=3 uid="uid://ug371mejlk8m"]
+
+[ext_resource type="Texture2D" uid="uid://cxcubc6n4syib" path="res://Assets/Sprites/Tileset.png" id="1_a0h12"]
+[ext_resource type="Script" uid="uid://cmvy8u4qqpvia" path="res://Scripts/Game Objects/Door.cs" id="2_pjvao"]
+[ext_resource type="Texture2D" uid="uid://dce50mfwywybt" path="res://Assets/Sprites/Black Spite.png" id="3_6ikf7"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pjvao"]
+atlas = ExtResource("1_a0h12")
+region = Rect2(320, 352, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6ikf7"]
+atlas = ExtResource("3_6ikf7")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_a0h12"]
+size = Vector2(32, 32)
+
+[node name="Door" type="Sprite2D" node_paths=PackedStringArray("_hitbox")]
+texture = ExtResource("1_a0h12")
+region_enabled = true
+region_rect = Rect2(320, 352, 32, 32)
+script = ExtResource("2_pjvao")
+_hitbox = NodePath("StaticBody2D")
+_lockedTexture = SubResource("AtlasTexture_pjvao")
+_openedTexture = SubResource("AtlasTexture_6ikf7")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+shape = SubResource("RectangleShape2D_a0h12")

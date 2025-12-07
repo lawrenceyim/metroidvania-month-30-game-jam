@@ -1,9 +1,9 @@
-using Godot;
 using System;
 using System.Text.Json;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 using FileSystem;
+using Godot;
 
 public class InputMapping {
     # region Consts
