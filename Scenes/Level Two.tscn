@@ -1,12 +1,18 @@
-[gd_scene load_steps=3 format=4 uid="uid://b55fvmjmuqqg4"]
+[gd_scene load_steps=4 format=4 uid="uid://b55fvmjmuqqg4"]
 
 [ext_resource type="Script" uid="uid://2ndkouxlodec" path="res://Scripts/Scenes/GameLevel.cs" id="1_gkoni"]
 [ext_resource type="TileSet" uid="uid://j887u0w74wgl" path="res://Assets/Tilesets/MainTileSet.tres" id="2_ddana"]
+[ext_resource type="AudioStream" uid="uid://bv2woxwlywqmx" path="res://Assets/Audio/Castle Exterior_Final single loop_12.9.25.wav" id="2_jam3o"]
 
 [node name="Level Two" type="Node2D"]
 script = ExtResource("1_gkoni")
 _sceneId = 1002
 metadata/_edit_vertical_guides_ = [-72.0]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_jam3o")
+volume_db = -15.0
+autoplay = true
 
 [node name="Tile Map" type="Node2D" parent="."]
 
