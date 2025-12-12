@@ -34,6 +34,7 @@ tile_map_data = PackedByteArray("AAAAABMAAwAAAAAAAAAAABQAAwAAAAEAAAABABMAAwABAAA
 tile_set = ExtResource("2_ddana")
 
 [node name="Platforms" type="TileMapLayer" parent="Tile Map"]
+tile_map_data = PackedByteArray("AAAEABIABAAAAAAAAAAFABIABAABAAAAAAAGABIABAACAAAAAAAIABAABAAAAAAAAAAJABAABAABAAAAAAAKABAABAACAAAAAAA=")
 tile_set = ExtResource("2_ddana")
 
 [node name="Enemies and Hazards" type="Node2D" parent="."]
