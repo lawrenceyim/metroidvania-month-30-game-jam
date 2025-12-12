@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cf5n1i243k75g"]
+[gd_scene load_steps=10 format=3 uid="uid://cf5n1i243k75g"]
 
 [ext_resource type="Texture2D" uid="uid://c78rax5i8i3yw" path="res://Assets/Sprites/Spritesheet.png" id="1_eurdg"]
 [ext_resource type="Script" uid="uid://dg4up1g7vkuka" path="res://Scripts/Game Objects/Enemies/Cannon.cs" id="2_7c2ej"]
+[ext_resource type="PackedScene" uid="uid://botorug3w5bx" path="res://Scenes/Game Objects/Cannonball.tscn" id="3_2fm4x"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7c2ej"]
 atlas = ExtResource("1_eurdg")
@@ -42,14 +43,19 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nlrms"]
 size = Vector2(24, 18)
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" node_paths=PackedStringArray("_cannonballSpawn")]
 sprite_frames = SubResource("SpriteFrames_afhcx")
 frame = 3
 frame_progress = 1.0
+script = ExtResource("2_7c2ej")
+_cannonball = ExtResource("3_2fm4x")
+_cannonballSpawn = NodePath("Node2D")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(2, 7)
 shape = SubResource("RectangleShape2D_nlrms")
-script = ExtResource("2_7c2ej")
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(-13, 2)
