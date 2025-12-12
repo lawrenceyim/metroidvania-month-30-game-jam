@@ -47,9 +47,16 @@ position = Vector2(38, 623)
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(640, 360)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="."]
+[node name="Left Boundary" type="StaticBody2D" parent="."]
 position = Vector2(-94, 638)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Left Boundary"]
+position = Vector2(48, -302)
+shape = SubResource("RectangleShape2D_qsjqm")
+
+[node name="Right Boundary" type="StaticBody2D" parent="."]
+position = Vector2(1278, 639)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Right Boundary"]
 position = Vector2(48, -302)
 shape = SubResource("RectangleShape2D_qsjqm")
