@@ -1,4 +1,5 @@
 using System;
+using Godot;
 
 public class TickTimer : ITick {
     public event Action TimedOut;
@@ -33,15 +34,15 @@ public class TickTimer : ITick {
         }
 
         _ticksLeft--;
-
+        GD.Print($"Ticks left {_ticksLeft}");
         if (_ticksLeft == 0) {
-            TimedOut?.Invoke();
-
             if (!_loop) {
                 _stopped = true;
+                TimedOut?.Invoke();
                 return;
             }
-
+            
+            TimedOut?.Invoke();
             _ticksLeft = _random.Next(_minTicksInclusive, _maxTicksExclusive);
         }
     }

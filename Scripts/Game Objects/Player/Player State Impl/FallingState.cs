@@ -36,7 +36,7 @@ public class FallingState : PlayerState {
     }
 
     public override void Enter() {
-        GD.Print("Entering Falling State");
+        // GD.Print("Entering Falling State");
         _player.movement.Y = 0;
         _player.SetAnimation(PlayerAnimationId.Jump);
     }

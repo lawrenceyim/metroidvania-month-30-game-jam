@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=4 uid="uid://t6824w52eco8"]
+[gd_scene load_steps=11 format=4 uid="uid://t6824w52eco8"]
 
 [ext_resource type="Script" uid="uid://2ndkouxlodec" path="res://Scripts/Scenes/GameLevel.cs" id="1_wpeww"]
 [ext_resource type="TileSet" uid="uid://j887u0w74wgl" path="res://Assets/Tilesets/MainTileSet.tres" id="2_tm3c5"]
+[ext_resource type="AudioStream" uid="uid://chq7sm7hnjes3" path="res://Assets/Audio/Interior Panic_single loop_FINAL_12.4.25_1.wav" id="3_b51br"]
 [ext_resource type="AudioStream" uid="uid://cusb6enla0imq" path="res://Assets/Audio/Castle Interior_Single Loop_FINAL_12.5.25.wav" id="4_mmujx"]
 [ext_resource type="PackedScene" uid="uid://ihcxp8lk1gei" path="res://Scenes/Enemies/Bat.tscn" id="4_wpeww"]
 [ext_resource type="PackedScene" uid="uid://de3eikfyxt0bl" path="res://Scenes/Enemies/Slime.tscn" id="5_q28ef"]
@@ -10,9 +11,12 @@
 [ext_resource type="PackedScene" uid="uid://dphi1qf1alggy" path="res://Scenes/Game Objects/Key.tscn" id="8_s3bbs"]
 [ext_resource type="PackedScene" uid="uid://ug371mejlk8m" path="res://Scenes/Game Objects/Door.tscn" id="9_tovyt"]
 
-[node name="Level" type="Node2D"]
+[node name="Level" type="Node2D" node_paths=PackedStringArray("_audioStreamPlayer")]
 script = ExtResource("1_wpeww")
 _sceneId = 1001
+_audioStreamPlayer = NodePath("AudioStreamPlayer")
+_regularMusic = ExtResource("4_mmujx")
+_panicMusic = ExtResource("3_b51br")
 
 [node name="TileMap" type="Node2D" parent="."]
 
@@ -37,7 +41,7 @@ tile_set = ExtResource("2_tm3c5")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_mmujx")
-volume_db = -15.0
+volume_db = -20.0
 autoplay = true
 
 [node name="Objects" type="Node2D" parent="."]
@@ -67,3 +71,6 @@ _player = NodePath("../../Player")
 [node name="Player" parent="." instance=ExtResource("5_tovyt")]
 z_index = 100
 position = Vector2(49, 264)
+
+[node name="Camera2D" type="Camera2D" parent="."]
+offset = Vector2(640, 360)

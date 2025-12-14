@@ -37,7 +37,7 @@ public class MovingState : PlayerState {
     }
 
     public override void Enter() {
-        GD.Print("Entering Moving State");
+        // GD.Print("Entering Moving State");
         _player.SetAnimation(PlayerAnimationId.Moving);
     }
 

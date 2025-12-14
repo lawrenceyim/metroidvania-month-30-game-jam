@@ -33,7 +33,7 @@ public class IdleState : PlayerState {
     }
 
     public override void Enter() {
-        GD.Print("Entering Idle State");
+        // GD.Print("Entering Idle State");
         _player.SetAnimation(PlayerAnimationId.Idle);
     }
 

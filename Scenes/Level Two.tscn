@@ -1,22 +1,26 @@
-[gd_scene load_steps=7 format=4 uid="uid://b55fvmjmuqqg4"]
+[gd_scene load_steps=8 format=4 uid="uid://b55fvmjmuqqg4"]
 
 [ext_resource type="Script" uid="uid://2ndkouxlodec" path="res://Scripts/Scenes/GameLevel.cs" id="1_gkoni"]
 [ext_resource type="TileSet" uid="uid://j887u0w74wgl" path="res://Assets/Tilesets/MainTileSet.tres" id="2_ddana"]
 [ext_resource type="AudioStream" uid="uid://bv2woxwlywqmx" path="res://Assets/Audio/Castle Exterior_Final single loop_12.9.25.wav" id="2_jam3o"]
+[ext_resource type="AudioStream" uid="uid://xxwnl88b2b6s" path="res://Assets/Audio/Exterior Panic. Final single loop. 12.12.25.wav" id="3_imy0n"]
 [ext_resource type="PackedScene" uid="uid://cf5n1i243k75g" path="res://Scenes/Enemies/Cannon.tscn" id="4_vqy1h"]
 [ext_resource type="PackedScene" uid="uid://c5oea303t02br" path="res://Scenes/Player/PlayerCharacter.tscn" id="5_qsjqm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsjqm"]
 size = Vector2(92, 672)
 
-[node name="Level Two" type="Node2D"]
+[node name="Level Two" type="Node2D" node_paths=PackedStringArray("_audioStreamPlayer")]
 script = ExtResource("1_gkoni")
 _sceneId = 1002
+_audioStreamPlayer = NodePath("AudioStreamPlayer")
+_regularMusic = ExtResource("2_jam3o")
+_panicMusic = ExtResource("3_imy0n")
 metadata/_edit_vertical_guides_ = [-72.0]
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("2_jam3o")
-volume_db = -15.0
+volume_db = -20.0
 autoplay = true
 
 [node name="Tile Map" type="Node2D" parent="."]
