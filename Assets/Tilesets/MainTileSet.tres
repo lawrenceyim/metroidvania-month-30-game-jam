@@ -1,4 +1,4 @@
-[gd_resource type="TileSet" load_steps=12 format=3 uid="uid://j887u0w74wgl"]
+[gd_resource type="TileSet" load_steps=14 format=3 uid="uid://j887u0w74wgl"]
 
 [ext_resource type="Texture2D" uid="uid://cxcubc6n4syib" path="res://Assets/Sprites/Tileset.png" id="1_5ps01"]
 [ext_resource type="PackedScene" uid="uid://b34ikfabbu0ri" path="res://Scenes/Game Objects/SpikeTrap.tscn" id="1_78pxq"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dce50mfwywybt" path="res://Assets/Sprites/Black Spite.png" id="4_xo34o"]
 [ext_resource type="Texture2D" uid="uid://bfoxsh41sw4vv" path="res://Assets/Sprites/Grass tiles.png" id="5_26tl4"]
 [ext_resource type="Texture2D" uid="uid://1qcs14awd2i2" path="res://Assets/Sprites/Exterior Platform Tiles.png" id="6_xpi0o"]
+[ext_resource type="Texture2D" uid="uid://godpatwppno2" path="res://Assets/Sprites/Rampart.png" id="7_q6bk1"]
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_5ps01"]
 scenes/1/scene = ExtResource("1_78pxq")
@@ -151,6 +152,17 @@ texture_region_size = Vector2i(32, 32)
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-16, -16, 16, -16, 16, 16, -16, 16)
 
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xr0xr"]
+texture = ExtResource("7_q6bk1")
+texture_region_size = Vector2i(32, 32)
+1:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+
 [resource]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
@@ -159,3 +171,4 @@ sources/0 = SubResource("TileSetScenesCollectionSource_5ps01")
 sources/2 = SubResource("TileSetAtlasSource_26tl4")
 sources/3 = SubResource("TileSetAtlasSource_xpi0o")
 sources/4 = SubResource("TileSetAtlasSource_q6bk1")
+sources/5 = SubResource("TileSetAtlasSource_xr0xr")
