@@ -45,6 +45,7 @@ public class JumpingState : PlayerState {
         _player.movement.Y = _player.jumpForce;
         _durationTicksLeft = (int)(.3f * Engine.PhysicsTicksPerSecond); // TODO: Temporary fix
         _player.SetAnimation(PlayerAnimationId.Idle);
+        _player.PlaySfx(Player.SfxId.Jumping);
 
         // TODO: Switch animation
         // TODO: Switch to airborne state when animation ends

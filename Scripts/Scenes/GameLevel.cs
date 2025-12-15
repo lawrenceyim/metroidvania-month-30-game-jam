@@ -46,6 +46,10 @@ public partial class GameLevel : Node2D, ITick {
         _gameClock.RemoveActiveScene(GetInstanceId());
     }
 
+    public void PhysicsTick() {
+        _timeLeftTimer.PhysicsTick();
+    }
+
     private void _HandleTimeOut() {
         GD.Print("HandleTimeOut");
         if (_isPanicked) {
@@ -68,9 +72,5 @@ public partial class GameLevel : Node2D, ITick {
 
     private void _GameOver() {
         _sceneManager.ChangeToCurrentScene();
-    }
-
-    public void PhysicsTick() {
-        _timeLeftTimer.PhysicsTick();
     }
 }

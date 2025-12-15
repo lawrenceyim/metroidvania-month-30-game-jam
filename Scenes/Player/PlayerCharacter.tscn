@@ -1,7 +1,9 @@
-[gd_scene load_steps=14 format=3 uid="uid://c5oea303t02br"]
+[gd_scene load_steps=16 format=3 uid="uid://c5oea303t02br"]
 
 [ext_resource type="Script" uid="uid://ch10jmxpv4oso" path="res://Scripts/Game Objects/Player/Player.cs" id="1_xfpj1"]
+[ext_resource type="AudioStream" uid="uid://b1e0cnv51nveb" path="res://Assets/Audio/SFX/foot step.wav" id="2_obv64"]
 [ext_resource type="Texture2D" uid="uid://c78rax5i8i3yw" path="res://Assets/Sprites/Spritesheet.png" id="2_xfpj1"]
+[ext_resource type="AudioStream" uid="uid://hn3dmmtp1cjh" path="res://Assets/Audio/SFX/jump.wav" id="3_ocib6"]
 [ext_resource type="Texture2D" uid="uid://d3ywvyatodq3o" path="res://Assets/Sprites/Player Jump.png" id="3_q1ate"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q1ate"]
@@ -73,13 +75,16 @@ size = Vector2(14, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xfpj1"]
 size = Vector2(14, 1)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_terrainCheck", "_hitbox")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("_sprite", "_terrainCheck", "_hitbox", "_sfx")]
 collision_layer = 3
 floor_stop_on_slope = false
 script = ExtResource("1_xfpj1")
 _sprite = NodePath("AnimatedSprite2D")
 _terrainCheck = NodePath("ShapeCast2D")
 _hitbox = NodePath("AnimatedSprite2D/Area2D/Hitbox")
+_sfx = NodePath("AudioStreamPlayer")
+_walkingSfx = ExtResource("2_obv64")
+_jumpingSfx = ExtResource("3_ocib6")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_xfpj1")
@@ -102,3 +107,6 @@ position = Vector2(-1, 16.5)
 shape = SubResource("RectangleShape2D_xfpj1")
 target_position = Vector2(0, 0.5)
 collide_with_areas = true
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+volume_db = -20.0

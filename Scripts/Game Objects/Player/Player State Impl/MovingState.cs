@@ -27,7 +27,7 @@ public class MovingState : PlayerState {
         _player.movement.X += _player.IsKeyPressed("D") ? 1 : 0;
         _player.movement.X += _player.IsKeyPressed("A") ? -1 : 0;
         _player.movement.X *= _player.movingSpeed;
-        
+
         if (_player.movement.IsZeroApprox()) {
             _player.SwitchState(PlayerStateId.Idle);
             return;
@@ -39,9 +39,13 @@ public class MovingState : PlayerState {
     public override void Enter() {
         // GD.Print("Entering Moving State");
         _player.SetAnimation(PlayerAnimationId.Moving);
+        _player.PlaySfx(Player.SfxId.Walking);
     }
 
-    public override void Exit() { }
+    public override void Exit() {
+        _player.PlaySfx(Player.SfxId.StopPlaying);
+    }
+
     public override void IsGrounded(bool isGrounded) {
         if (!isGrounded) {
             _player.SwitchState(PlayerStateId.Falling);
