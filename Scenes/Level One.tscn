@@ -74,6 +74,7 @@ z_index = 100
 position = Vector2(49, 264)
 
 [node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-320, -160)
 offset = Vector2(640, 360)
 
 [node name="Area2D" parent="." instance=ExtResource("11_5bnv1")]

@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using Godot;
+using Godot.NativeInterop;
 using InputSystem;
 using ServiceSystem;
 
@@ -39,6 +40,7 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
     private InputStateMachine _inputStateMachine;
     private GameClock _gameClock;
     private TickTimer _groundCheckCooldown;
+    private SfxId _currentSfx = SfxId.StopPlaying;
 
     public override void _Ready() {
         ServiceLocator serviceLocator = GetNode<ServiceLocator>(ServiceLocator.AutoloadPath);
@@ -48,6 +50,7 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
         _gameClock.AddActiveScene(this, GetInstanceId());
         _InitializeStateMachine();
         _sprite.Play();
+        _sfx.Finished += _handleSfxLoop;
     }
 
     public override void _ExitTree() {
@@ -107,18 +110,29 @@ public partial class Player : CharacterBody2D, ITick, IInputState {
     }
 
     public void PlaySfx(SfxId sfxId) {
+        _currentSfx = sfxId;
         switch (sfxId) {
             case SfxId.StopPlaying:
                 _sfx.Stop();
                 break;
             case SfxId.Jumping:
                 _sfx.Stream = _jumpingSfx;
-                _sfx.Autoplay = false;
                 _sfx.Play();
                 break;
             case SfxId.Walking:
                 _sfx.Stream = _walkingSfx;
-                _sfx.Autoplay = true;
+                _sfx.Play();
+                break;
+        }
+    }
+
+    private void _handleSfxLoop() {
+        switch (_currentSfx) {
+            case SfxId.StopPlaying:
+                break;
+            case SfxId.Jumping:
+                break;
+            case SfxId.Walking:
                 _sfx.Play();
                 break;
         }
