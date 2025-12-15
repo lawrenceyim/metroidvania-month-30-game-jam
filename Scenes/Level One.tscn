@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://t6824w52eco8"]
+[gd_scene load_steps=12 format=4 uid="uid://t6824w52eco8"]
 
 [ext_resource type="Script" uid="uid://2ndkouxlodec" path="res://Scripts/Scenes/GameLevel.cs" id="1_wpeww"]
 [ext_resource type="TileSet" uid="uid://j887u0w74wgl" path="res://Assets/Tilesets/MainTileSet.tres" id="2_tm3c5"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bv0tqycp5rhj8" path="res://Scenes/Enemies/Ghost.tscn" id="6_tm3c5"]
 [ext_resource type="PackedScene" uid="uid://dphi1qf1alggy" path="res://Scenes/Game Objects/Key.tscn" id="8_s3bbs"]
 [ext_resource type="PackedScene" uid="uid://ug371mejlk8m" path="res://Scenes/Game Objects/Door.tscn" id="9_tovyt"]
+[ext_resource type="PackedScene" uid="uid://cbnsukq8con60" path="res://Scenes/Game Objects/AreaTransitionBox.tscn" id="11_5bnv1"]
 
 [node name="Level" type="Node2D" node_paths=PackedStringArray("_audioStreamPlayer")]
 script = ExtResource("1_wpeww")
@@ -74,3 +75,9 @@ position = Vector2(49, 264)
 
 [node name="Camera2D" type="Camera2D" parent="."]
 offset = Vector2(640, 360)
+
+[node name="Area2D" parent="." instance=ExtResource("11_5bnv1")]
+position = Vector2(699, 143)
+_nextScene = 1002
+
+[editable path="Area2D"]
