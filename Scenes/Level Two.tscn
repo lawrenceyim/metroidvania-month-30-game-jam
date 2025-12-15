@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://b55fvmjmuqqg4"]
+[gd_scene load_steps=9 format=4 uid="uid://b55fvmjmuqqg4"]
 
 [ext_resource type="Script" uid="uid://2ndkouxlodec" path="res://Scripts/Scenes/GameLevel.cs" id="1_gkoni"]
 [ext_resource type="TileSet" uid="uid://j887u0w74wgl" path="res://Assets/Tilesets/MainTileSet.tres" id="2_ddana"]
@@ -9,6 +9,9 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsjqm"]
 size = Vector2(92, 672)
+
+[sub_resource type="LabelSettings" id="LabelSettings_imy0n"]
+font_size = 72
 
 [node name="Level Two" type="Node2D" node_paths=PackedStringArray("_audioStreamPlayer")]
 script = ExtResource("1_gkoni")
@@ -65,3 +68,13 @@ position = Vector2(1278, 639)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Right Boundary"]
 position = Vector2(48, -302)
 shape = SubResource("RectangleShape2D_qsjqm")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 226.0
+offset_top = 82.0
+offset_right = 1024.0
+offset_bottom = 181.0
+text = "Unfinished Level"
+label_settings = SubResource("LabelSettings_imy0n")
+horizontal_alignment = 1
+vertical_alignment = 1
